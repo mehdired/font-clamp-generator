@@ -1,14 +1,21 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ParamClampType } from '../App'
 
 type Props = {
-	setValue: Dispatch<SetStateAction<string>>
-	inputValue: string
+	setValue: Dispatch<SetStateAction<ParamClampType>>
+	name: string
+	inputValue: number
 	placeholder: string
 }
 
-export default function Input({ inputValue, placeholder, setValue }: Props) {
+export default function Input({
+	name,
+	inputValue,
+	placeholder,
+	setValue
+}: Props) {
 	const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-		setValue(event.target.value)
+		setValue((previous) => ({ ...previous, [name]: event.target.value }))
 	}
 
 	return (

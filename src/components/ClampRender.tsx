@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
+import { ParamClampType } from '../App'
 
 type ClampRenderProps = {
-	minWidthPx: number
-	maxWidthPx: number
-	minFontSize: number
-	maxFontSize: number
+	paramClamp: ParamClampType
 }
 
-export default function ClampRender({
-	minWidthPx,
-	maxWidthPx,
-	minFontSize,
-	maxFontSize
-}: ClampRenderProps) {
+const root = document.querySelector('html') as HTMLElement
+const pixelsPerRem = Number(getComputedStyle(root).fontSize.slice(0, -2))
+
+export default function ClampRender({ paramClamp }: ClampRenderProps) {
 	const [clamp, setClamp] = useState('')
 
 	useEffect(() => {
 		calcul()
-	}, [minWidthPx, maxWidthPx, maxFontSize, minFontSize])
+	}, [paramClamp])
 
 	const calcul = () => {
-		const root = document.querySelector('html') as HTMLElement
-		const pixelsPerRem = Number(
-			getComputedStyle(root).fontSize.slice(0, -2)
-		)
-
-		const minWidth = minWidthPx / pixelsPerRem
-		const maxWidth = maxWidthPx / pixelsPerRem
-		const minFont = minFontSize / pixelsPerRem
-		const maxFont = maxFontSize / pixelsPerRem
+		const minWidth = paramClamp.minWidthValue / pixelsPerRem
+		const maxWidth = paramClamp.maxWidthValue / pixelsPerRem
+		const minFont = paramClamp.minFontValue / pixelsPerRem
+		const maxFont = paramClamp.maxFontValue / pixelsPerRem
 
 		const slope = (maxFont - minFont) / (maxWidth - minWidth)
 		const yAxisIntersection = -minWidth * slope + minFont
@@ -40,10 +32,6 @@ export default function ClampRender({
 				slope * 100
 			}vw, ${maxFont}rem)`
 		)
-	}
-
-	if (!minWidthPx || !maxWidthPx || !maxFontSize || !minFontSize) {
-		return null
 	}
 
 	return <p>{clamp}</p>
