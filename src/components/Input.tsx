@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 
 type Props = {
 	setValue: Dispatch<SetStateAction<string>>
@@ -21,3 +21,5 @@ export default function Input({ inputValue, placeholder, setValue }: Props) {
 		/>
 	)
 }
+
+export const MemoInput = React.memo(Input)

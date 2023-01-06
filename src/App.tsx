@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ClampRender from './components/ClampRender'
-import Input from './components/Input'
+import { MemoInput } from './components/Input'
 
 export default function App() {
 	const [minWidthValue, setMinWidthValue] = useState('')
@@ -10,22 +10,22 @@ export default function App() {
 
 	return (
 		<div>
-			<Input
+			<MemoInput
 				inputValue={minWidthValue}
 				setValue={setMinWidthValue}
 				placeholder="minWidth"
 			/>
-			<Input
+			<MemoInput
 				inputValue={maxWidthValue}
 				setValue={setMaxWidthValue}
 				placeholder="maxWidth"
 			/>
-			<Input
+			<MemoInput
 				inputValue={minFontValue}
 				setValue={setMinFontValue}
 				placeholder="minFont"
 			/>
-			<Input
+			<MemoInput
 				inputValue={maxFontValue}
 				setValue={setMaxFontValue}
 				placeholder="maxFont"
