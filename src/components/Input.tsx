@@ -20,7 +20,7 @@ export default function Input({
 
 	return (
 		<input
-			className="border border-gray-400 rounded"
+			className="border border-gray-400 rounded flex-1 w-full px-3 py-1.5 bg-slate-900"
 			type="text"
 			value={inputValue}
 			onChange={onChangeInput}
